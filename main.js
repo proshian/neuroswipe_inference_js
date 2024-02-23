@@ -28,9 +28,11 @@ async function getKeyboardData(path) {
 
 
 class SwipeEmiter extends EventTarget{
-    constructor(keyboard_el) {
+    constructor(keyboard_el, width, height) {
         super();
         this.keyboard_el = keyboard_el;
+        this.grid_width = width
+        this.grid_height = height
         this.touchPositions = { x: [], y: [], t: [] };
 
         keyboard_el.addEventListener('touchstart', this.handleTouchStart.bind(this));
@@ -88,9 +90,11 @@ class SwipeEmiter extends EventTarget{
     }
 
     appendTouchPositions(touchList, cur_t) {
+        const x_coef = this.grid_width / this.keyboard_el.width;
+        const y_coef = this.grid_height / this.keyboard_el.height;
         for (const touch of touchList) {
-            const x = touch.clientX - this.keyboard_el.getBoundingClientRect().left;
-            const y = touch.clientY - this.keyboard_el.getBoundingClientRect().top;
+            const x = (touch.clientX - this.keyboard_el.getBoundingClientRect().left) * x_coef;
+            const y = (touch.clientY - this.keyboard_el.getBoundingClientRect().top) * y_coef;
             const t = cur_t - this.t_start;
             this.touchPositions.x.push(Math.round(x));
             this.touchPositions.y.push(Math.round(y));
@@ -114,7 +118,9 @@ const canvas = document.getElementById('keyboardCanvas');
 canvas.width = 700;
 canvas.height = 350;
 
-getKeyboardData('./keyboardData.json').then((keyboardData) => {draw_keyboard(canvas, keyboardData)});
-
-const swipeEmiter = new SwipeEmiter(canvas);
-swipeEmiter.addEventListener('swipe', handleSwipe)
+getKeyboardData('./keyboardData.json').then((keyboardData) => {
+    draw_keyboard(canvas, keyboardData)
+    const swipeEmiter = new SwipeEmiter(
+        canvas, keyboardData["width"], keyboardData["height"]);
+    swipeEmiter.addEventListener('swipe', handleSwipe)
+});
