@@ -106,6 +106,25 @@ function handleSwipe(event) {
     x_el.innerText = event.detail.x.toString().replaceAll(",", ", ")
     y_el.innerText = event.detail.y.toString().replaceAll(",", ", ")
     t_el.innerText = event.detail.t.toString().replaceAll(",", ", ")
+
+
+    // Send data to the Flask server
+    fetch('http://127.0.0.1:5000/process_swipe', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(event.detail),
+    })
+    .then(response => response.json())
+    .then(result => {
+        // Handle the result from the server
+        console.log(result.predictions);
+        document.getElementById('predictions').innerText = result.predictions;
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 }
 
 
@@ -113,7 +132,7 @@ function handleSwipe(event) {
 const keyboardEl = document.getElementById('keyboard');
 keyboardEl.style.height = keyboardEl.getBoundingClientRect().width / 2 + 'px'; 
 
-getKeyboardData('./keyboardData.json').then((keyboardData) => {
+getKeyboardData(`/static/${'./keyboardData.json'}`).then((keyboardData) => {
     fill_keyboard(keyboardEl, keyboardData)
     const swipeEmiter = new SwipeEmiter(
         keyboardEl, keyboardData["width"], keyboardData["height"]);

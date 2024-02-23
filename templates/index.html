@@ -5,8 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Keyboard Swipe Logger</title>
 <style>
+    #predictions {
+        width: 100%;
+        max-width: 700px;
+        border: 1px solid black;
+        margin: auto;
+    }
     #keyboard {
         position: relative;
+        height: 16px;
         width: 100%;
         max-width: 700px;
         border: 1px solid black;
@@ -23,6 +30,8 @@
 </head>
 <body>
 
+<div id="predictions"></div>
+
 <div id="keyboard"></div>
 
 <div>
@@ -38,7 +47,8 @@
     <p id = "t"></p>
 </div>
 
-<script type = "module", src="main.js"></script>
+<script src="{{ url_for('static', filename='main.js') }}"></script>
+<!-- <script type = "module", src="main.js"></script> -->
 
 </body>
 </html>
