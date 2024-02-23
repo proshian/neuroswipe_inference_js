@@ -36,6 +36,11 @@ class SwipeEmiter extends EventTarget{
         keyboard_el.addEventListener('touchstart', this.handleTouchStart.bind(this));
         keyboard_el.addEventListener('touchmove', this.handleTouchMove.bind(this));
         keyboard_el.addEventListener('touchend', this.handleTouchEnd.bind(this));
+        keyboard_el.addEventListener('mousedown', this.handleMouseDown.bind(this));
+        keyboard_el.addEventListener('mousemove', this.handleMouseMove.bind(this));
+        keyboard_el.addEventListener('mouseup', this.handleMouseUp.bind(this));
+
+        keyboard_el.addEventListener
     }
 
     handleTouchStart(event) {
@@ -56,6 +61,28 @@ class SwipeEmiter extends EventTarget{
         const t = Date.now();
         this.appendTouchPositions(event.changedTouches, t);
 
+        const swipeEvent = new CustomEvent('swipe', { detail: this.touchPositions });
+        this.dispatchEvent(swipeEvent);
+    }
+
+    handleMouseDown(event) {
+        event.preventDefault();
+        this.touchPositions = { x: [], y: [], t: [] };
+        const t = this.t_start = Date.now();
+        this.appendTouchPositions([{ clientX: event.clientX, clientY: event.clientY }], t);
+    }
+
+    handleMouseMove(event) {
+        event.preventDefault();
+        const t = Date.now();
+        this.appendTouchPositions([{ clientX: event.clientX, clientY: event.clientY }], t);
+    }
+
+    handleMouseUp(event) {
+        event.preventDefault();
+        const t = Date.now();
+        this.appendTouchPositions([{ clientX: event.clientX, clientY: event.clientY }], t);
+        
         const swipeEvent = new CustomEvent('swipe', { detail: this.touchPositions });
         this.dispatchEvent(swipeEvent);
     }
