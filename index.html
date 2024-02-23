@@ -5,15 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Keyboard Swipe Logger</title>
 <style>
-    canvas {
+    #keyboard {
+        position: relative;
+        width: 100%;
+        max-width: 700px;
         border: 1px solid black;
-        margin: 20px auto;
+        margin: auto;
+    }
+    .key-hitbox {
+        position: absolute;
+        border: 1px solid black;
+        background-color: lightgray;
+        text-align: center;
+        cursor: pointer;
     }
 </style>
 </head>
 <body>
 
-<canvas id="keyboardCanvas"></canvas>
+<div id="keyboard"></div>
 
 <div>
     <p>x: </p>

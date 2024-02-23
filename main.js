@@ -1,22 +1,18 @@
-function draw_keyboard(canvas, keyboardData) {
+function fill_keyboard(keyboardElem, keyboardData) {
 
-    const ctx = canvas.getContext('2d'); 
+    keyboardData.keys.forEach(key => {
+        const x_coef = keyboardElem.getBoundingClientRect().width / keyboardData.width;
+        const y_coef = keyboardElem.getBoundingClientRect().height / keyboardData.height;
 
-    keyboardData["keys"].forEach(key => {
-        const x = (key.hitbox.x / keyboardData.width) * canvas.width;
-        const y = (key.hitbox.y / keyboardData.height) * canvas.height;
-        const w = (key.hitbox.w / keyboardData.width) * canvas.width;
-        const h = (key.hitbox.h / keyboardData.height) * canvas.height;
-
-        ctx.fillStyle = 'lightgray';
-        ctx.fillRect(x, y, w, h);
-
-        ctx.strokeStyle = 'black';
-        ctx.strokeRect(x, y, w, h);
-
-        ctx.fillStyle = 'black';
-        ctx.fillText(key.label || key.action, x + w / 2, y + h / 2);
-    });
+        const keyElem = document.createElement('div');
+        keyElem.classList.add('key-hitbox');
+        keyElem.textContent = key.label || key.action;
+        keyElem.style.left = key.hitbox.x * x_coef + 'px';
+        keyElem.style.top = key.hitbox.y * y_coef + 'px';
+        keyElem.style.width = key.hitbox.w * x_coef + 'px';
+        keyElem.style.height = key.hitbox.h * y_coef + 'px';
+        keyboardElem.appendChild(keyElem);
+    })
 }
 
 async function getKeyboardData(path) {
@@ -24,7 +20,6 @@ async function getKeyboardData(path) {
     const json = await res.json();
     return json
 }
-
 
 
 class SwipeEmiter extends EventTarget{
@@ -90,8 +85,8 @@ class SwipeEmiter extends EventTarget{
     }
 
     appendTouchPositions(touchList, cur_t) {
-        const x_coef = this.grid_width / this.keyboard_el.width;
-        const y_coef = this.grid_height / this.keyboard_el.height;
+        const x_coef = this.grid_width / this.keyboard_el.getBoundingClientRect().width;
+        const y_coef = this.grid_height / this.keyboard_el.getBoundingClientRect().height;
         for (const touch of touchList) {
             const x = (touch.clientX - this.keyboard_el.getBoundingClientRect().left) * x_coef;
             const y = (touch.clientY - this.keyboard_el.getBoundingClientRect().top) * y_coef;
@@ -103,7 +98,6 @@ class SwipeEmiter extends EventTarget{
     }
 }
 
-
 function handleSwipe(event) {
     const x_el = document.getElementById('x');
     const y_el = document.getElementById('y');
@@ -114,13 +108,14 @@ function handleSwipe(event) {
     t_el.innerText = event.detail.t.toString().replaceAll(",", ", ")
 }
 
-const canvas = document.getElementById('keyboardCanvas');
-canvas.width = 700;
-canvas.height = 350;
+
+
+const keyboardEl = document.getElementById('keyboard');
+keyboardEl.style.height = keyboardEl.getBoundingClientRect().width / 2 + 'px'; 
 
 getKeyboardData('./keyboardData.json').then((keyboardData) => {
-    draw_keyboard(canvas, keyboardData)
+    fill_keyboard(keyboardEl, keyboardData)
     const swipeEmiter = new SwipeEmiter(
-        canvas, keyboardData["width"], keyboardData["height"]);
+        keyboardEl, keyboardData["width"], keyboardData["height"]);
     swipeEmiter.addEventListener('swipe', handleSwipe)
 });
