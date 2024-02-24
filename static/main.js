@@ -109,7 +109,7 @@ function handleSwipe(event) {
 
 
     // Send data to the Flask server
-    fetch('http://127.0.0.1:5000/process_swipe', {
+    fetch('/process_swipe', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

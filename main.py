@@ -1,5 +1,7 @@
 from flask import Flask, render_template, jsonify, request
 
+from predict import predict
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -16,7 +18,8 @@ def process_swipe():
     t = data.get('t')
 
     # Process the data (for now, just return a simple string)
-    predictions = [f"dummy_prediction_{i}" for i in range(4)]
+    # predictions = [f"dummy_prediction_{i}" for i in range(4)]
+    predictions = predict(x,y,t)
 
     # Return the result as JSON
     return jsonify({'predictions': predictions})

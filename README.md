@@ -6,9 +6,12 @@ TODO:
 * Refactor
 * Add pytorch model thata predicts the word
 * Leave swipepoints connected with lines on screen until new  mousedown or touchstart event happens
+* Resize keyboard when page is resized
 
 Run: 
 
 ``` sh
-npx live-server
+python main.py
 ```
+
+сравнить validation dataset и данные генерирующиеся в predict для одной кривой
