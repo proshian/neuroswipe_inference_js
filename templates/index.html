@@ -30,22 +30,16 @@
 </head>
 <body>
 
-<div id="predictions"></div>
+<div id = "predictions">
+<ol id = "predictions-list">
+    <li id = "pred-0"></li>
+    <li id = "pred-1"></li>
+    <li id = "pred-2"></li>
+    <li id = "pred-3"></li>
+</ol>
+</div>
 
 <div id="keyboard"></div>
-
-<div>
-    <p>x: </p>
-    <p id = "x"></p>
-</div>
-<div>
-    <p>y: </p>
-    <p id = "y"></p>
-</div>
-<div>
-    <p>t: </p>
-    <p id = "t"></p>
-</div>
 
 <script src="{{ url_for('static', filename='main.js') }}"></script>
 <!-- <script type = "module", src="main.js"></script> -->

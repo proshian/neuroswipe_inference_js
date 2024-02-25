@@ -98,14 +98,30 @@ class SwipeEmiter extends EventTarget{
     }
 }
 
-function handleSwipe(event) {
-    const x_el = document.getElementById('x');
-    const y_el = document.getElementById('y');
-    const t_el = document.getElementById('t');
 
-    x_el.innerText = event.detail.x.toString().replaceAll(",", ", ")
-    y_el.innerText = event.detail.y.toString().replaceAll(",", ", ")
-    t_el.innerText = event.detail.t.toString().replaceAll(",", ", ")
+function updatePredictions(predictions) {
+    predictions.forEach((value, index) => {
+        document.getElementById('pred-' + index).innerText = value;
+    })
+}
+
+function clearPredictions() {
+    n_predictions = 4
+    for (let i=0; i < n_predictions; i++) {
+        document.getElementById('pred-' + i).innerText = '';
+    }
+}
+
+
+function handleSwipe(event) {
+    console.log(event.detail)
+    // const x_el = document.getElementById('x');
+    // const y_el = document.getElementById('y');
+    // const t_el = document.getElementById('t');
+
+    // x_el.innerText = event.detail.x.toString().replaceAll(",", ", ")
+    // y_el.innerText = event.detail.y.toString().replaceAll(",", ", ")
+    // t_el.innerText = event.detail.t.toString().replaceAll(",", ", ")
 
 
     // Send data to the Flask server
@@ -119,8 +135,8 @@ function handleSwipe(event) {
     .then(response => response.json())
     .then(result => {
         // Handle the result from the server
-        console.log(result.predictions);
-        document.getElementById('predictions').innerText = result.predictions;
+        console.log(result);
+        updatePredictions(result);
     })
     .catch(error => {
         console.error('Error:', error);
@@ -131,6 +147,8 @@ function handleSwipe(event) {
 
 const keyboardEl = document.getElementById('keyboard');
 keyboardEl.style.height = keyboardEl.getBoundingClientRect().width / 2 + 'px'; 
+keyboardEl.addEventListener('touchstart', (ev) => {clearPredictions()})
+keyboardEl.addEventListener('mousedown', (ev) => {clearPredictions()})
 
 getKeyboardData(`/static/${'./keyboardData.json'}`).then((keyboardData) => {
     fill_keyboard(keyboardEl, keyboardData)

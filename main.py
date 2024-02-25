@@ -22,7 +22,7 @@ def process_swipe():
     predictions = predict(x,y,t)
 
     # Return the result as JSON
-    return jsonify({'predictions': predictions})
+    return jsonify(predictions)
 
 if __name__ == '__main__':
     app.run(debug=True)
