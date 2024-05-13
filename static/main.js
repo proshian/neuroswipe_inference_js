@@ -1,5 +1,4 @@
 function fill_keyboard(keyboardElem, keyboardData) {
-
     keyboardData.keys.forEach(key => {
         const x_coef = keyboardElem.getBoundingClientRect().width / keyboardData.width;
         const y_coef = keyboardElem.getBoundingClientRect().height / keyboardData.height;
@@ -15,7 +14,7 @@ function fill_keyboard(keyboardElem, keyboardData) {
     })
 }
 
-async function getKeyboardData(path) {
+async function getGridNameToGrid(path) {
     const res = await fetch(path);
     const json = await res.json();
     return json
@@ -124,7 +123,7 @@ function handleSwipe(event) {
     // t_el.innerText = event.detail.t.toString().replaceAll(",", ", ")
 
 
-    // Send data to the Flask server
+    // Send data to the server
     fetch('/process_swipe', {
         method: 'POST',
         headers: {
@@ -150,9 +149,11 @@ keyboardEl.style.height = keyboardEl.getBoundingClientRect().width / 2 + 'px';
 keyboardEl.addEventListener('touchstart', (ev) => {clearPredictions()})
 keyboardEl.addEventListener('mousedown', (ev) => {clearPredictions()})
 
-getKeyboardData(`/static/${'./keyboardData.json'}`).then((keyboardData) => {
-    fill_keyboard(keyboardEl, keyboardData)
+grid_name = "extra"
+
+getGridNameToGrid(`/static/${'./gridname_to_grid.json'}`).then((gnameToGrid) => {
+    fill_keyboard(keyboardEl, gnameToGrid[grid_name])
     const swipeEmiter = new SwipeEmiter(
-        keyboardEl, keyboardData["width"], keyboardData["height"]);
+        keyboardEl, gnameToGrid[grid_name]["width"], gnameToGrid[grid_name]["height"]);
     swipeEmiter.addEventListener('swipe', handleSwipe)
 });
