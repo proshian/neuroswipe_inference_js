@@ -6,6 +6,12 @@ from predict import predict
 
 app = Flask(__name__)
 
+# Predictor stores 
+# * model with weights
+# * data_preproessing_function
+# * decoding method
+predictor = Predictor()
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -21,7 +27,7 @@ def process_swipe():
 
     # Process the data (for now, just return a simple string)
     # predictions = [f"dummy_prediction_{i}" for i in range(4)]
-    predictions = predict(x,y,t)
+    predictions = predictor.predict(x,y,t)
 
     # Return the result as JSON
     return jsonify(predictions)
