@@ -1,3 +1,6 @@
+import gnameToGrid from './gridname_to_grid.js';
+
+
 function fill_keyboard(keyboardElem, keyboardData) {
     keyboardData.keys.forEach(key => {
         const x_coef = keyboardElem.getBoundingClientRect().width / keyboardData.width;
@@ -105,7 +108,7 @@ function updatePredictions(predictions) {
 }
 
 function clearPredictions() {
-    n_predictions = 4
+    const n_predictions = 4
     for (let i=0; i < n_predictions; i++) {
         document.getElementById('pred-' + i).innerText = '';
     }
@@ -149,11 +152,9 @@ keyboardEl.style.height = keyboardEl.getBoundingClientRect().width / 2 + 'px';
 keyboardEl.addEventListener('touchstart', (ev) => {clearPredictions()})
 keyboardEl.addEventListener('mousedown', (ev) => {clearPredictions()})
 
-grid_name = "extra"
+const grid_name = "extra"
 
-getGridNameToGrid(`/static/${'./gridname_to_grid.json'}`).then((gnameToGrid) => {
-    fill_keyboard(keyboardEl, gnameToGrid[grid_name])
-    const swipeEmiter = new SwipeEmiter(
-        keyboardEl, gnameToGrid[grid_name]["width"], gnameToGrid[grid_name]["height"]);
-    swipeEmiter.addEventListener('swipe', handleSwipe)
-});
+fill_keyboard(keyboardEl, gnameToGrid[grid_name])
+const swipeEmiter = new SwipeEmiter(
+    keyboardEl, gnameToGrid[grid_name]["width"], gnameToGrid[grid_name]["height"]);
+swipeEmiter.addEventListener('swipe', handleSwipe)

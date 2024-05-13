@@ -1,3 +1,4 @@
+export default
 {
   "extra":{
     "width":1080,
