@@ -3,7 +3,7 @@ from typing import List
 import torch
 
 from nearest_key_lookup import NearestKeyLookup
-from tokenizers import KeyboardTokenizerv1, CharLevelTokenizerv2
+from ns_tokenizers import KeyboardTokenizerv1, CharLevelTokenizerv2
 from word_generators import BeamGenerator
 from model import get_m1_bigger_model
 

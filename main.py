@@ -1,4 +1,4 @@
-import sys; import os; sys.path.insert(1, os.path.join(os.getcwd(), "src"))
+import sys; import os; sys.path.insert(1, os.path.join(os.getcwd(), "yandex-cup-2023-ml-neuroswipe/src"))
 
 from flask import Flask, render_template, jsonify, request
 
