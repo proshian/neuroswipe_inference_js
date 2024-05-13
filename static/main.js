@@ -17,11 +17,6 @@ function fill_keyboard(keyboardElem, keyboardData) {
     })
 }
 
-async function getGridNameToGrid(path) {
-    const res = await fetch(path);
-    const json = await res.json();
-    return json
-}
 
 
 class SwipeEmiter extends EventTarget{

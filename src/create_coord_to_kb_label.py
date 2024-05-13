@@ -10,4 +10,4 @@ if __name__ == "__main__":
     
     keyboard_selection_set = set(KeyboardTokenizerv1().i2t)
     nearest_key_lookup = NearestKeyLookup(grid, keyboard_selection_set)
-    nearest_key_lookup.save_state('nearest_key_lookup_state.pkl')
+    nearest_key_lookup.save_state('../nearest_key_lookup_state.pkl')
