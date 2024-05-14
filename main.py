@@ -2,7 +2,7 @@ import sys; import os; sys.path.insert(1, os.path.join(os.getcwd(), "yandex-cup-
 
 from flask import Flask, render_template, jsonify, request
 
-from predict import predict
+from predict import Predictor
 
 app = Flask(__name__)
 
