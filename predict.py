@@ -32,7 +32,11 @@ class Predictor:
         self.set_feats_extractor("traj_and_nearest")
         self.model = get_m1_bigger_model('cpu','./static/m1_bigger_v2__2023_11_12__20_38_47__0.13129__greed_acc_0.86130__extra_l2_0_ls0_switch_2.pt')
         char_tokenizer = CharLevelTokenizerv2('./static/voc.txt')
-        self.word_generator = BeamGenerator(self.model, char_tokenizer, 'cpu')
+
+        with open('./static/voc.txt', 'r', encoding='utf-8') as f:
+            vocab = f.read().splitlines()
+
+        self.word_generator = BeamGenerator(self.model, char_tokenizer, 'cpu', vocab, 34)
 
     # def set_word_generator(self, generator_name) -> None:
     #     assert generator_name in GENERATOR_NAME_TO_CTOR_AND_STATE
