@@ -11,7 +11,7 @@ TODO:
             * график обучения с точкой на графике, соответствующей эпохе
             * значениия метрик на валидации
     * Выбрать метод декодирования (bs with voc, bs no voc, greedy voc, greedy no voc)
-
+* Add a mouse / finger trail (like blue trail in gboard)
 * Leave swipepoints connected with lines on screen until new  mousedown or touchstart event happens
 * Resize keyboard when page is resized
 
@@ -22,7 +22,7 @@ cd yandex-cup-2023-ml-neuroswipe
 git checkout embeding_experiments
 cd ..
 ```
-
+щ
 If doesn't work try:
 ``` sh
 cd yandex-cup-2023-ml-neuroswipe
@@ -100,3 +100,6 @@ def index():
     predictor = Predictor()
     return render_template('index.html')
 ```
+
+с точки зрения дизайна приложене может выглядеть так:
+![design](design_idea.svg)
