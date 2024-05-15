@@ -26,6 +26,8 @@
         text-align: center;
         cursor: pointer;
     }
+
+ 
 </style>
 </head>
 <body>
@@ -40,6 +42,21 @@
 </div>
 
 <div id="keyboard"></div>
+
+<script>
+    let mouseeeConfig = {
+        color: "#fff",
+        clickAnimation: false,
+        showTrailAlways: false,
+      };
+</script>
+
+<script
+  src="{{ url_for('static', filename='mouse_cursor/index.js') }}"
+  type="module"
+></script>
+
+
 
 <script src="{{ url_for('static', filename='main.js') }}" type="module"> </script>
 <!-- <script type = "module", src="main.js"></script> -->

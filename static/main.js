@@ -42,6 +42,10 @@ class SwipeEmiter extends EventTarget{
         this.touchPositions = { x: [], y: [], t: [] };
         const t = this.t_start = Date.now();
         this.appendTouchPositions(event.touches, t);
+
+        mouseeeConfig = {
+            showTrail: true,
+        };
     }
 
     handleTouchMove(event) {
@@ -57,6 +61,10 @@ class SwipeEmiter extends EventTarget{
 
         const swipeEvent = new CustomEvent('swipe', { detail: this.touchPositions });
         this.dispatchEvent(swipeEvent);
+
+        // mouseeeConfig = {
+        //     showTrail: false,
+        // };
     }
 
     handleMouseDown(event) {
@@ -64,6 +72,10 @@ class SwipeEmiter extends EventTarget{
         this.touchPositions = { x: [], y: [], t: [] };
         const t = this.t_start = Date.now();
         this.appendTouchPositions([{ clientX: event.clientX, clientY: event.clientY }], t);
+
+        mouseeeConfig = {
+            showTrail: true,
+        };
     }
 
     handleMouseMove(event) {
@@ -79,6 +91,10 @@ class SwipeEmiter extends EventTarget{
         
         const swipeEvent = new CustomEvent('swipe', { detail: this.touchPositions });
         this.dispatchEvent(swipeEvent);
+
+        // mouseeeConfig = {
+        //     showTrail: false,
+        // };
     }
 
     appendTouchPositions(touchList, cur_t) {
