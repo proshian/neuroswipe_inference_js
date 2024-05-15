@@ -4,6 +4,7 @@ from flask import Flask, render_template, jsonify, request
 
 from predict import Predictor
 
+predictor = None
 app = Flask(__name__)
 
 # Predictor stores 
