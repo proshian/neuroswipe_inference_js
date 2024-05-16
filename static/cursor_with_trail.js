@@ -98,8 +98,48 @@
   }
 
 
+
+  document.addEventListener("touchmove", (e) => {
+    cursor.style.transition = "none";
+    cursor.style.display = "flex";
+    for (const touch of e.touches) {
+      cursor.style.top = `${touch.pageY - size / 2}px`;
+      cursor.style.left = `${touch.pageX - size / 2}px`;
+
+      if (config.showTrailAlways | (config.showTrailWhileMouseDown & mouseIsDown)) {
+        const trail = document.createElement("div");
+        trail.style.backgroundColor = config.trailColor;
+        trail.style.width = `${size * 0.4}px`;
+        trail.style.height = `${size * 0.4}px`;
+        trail.style.position = "absolute";
+        trail.style.borderRadius = "50%";
+        trail.style.top = `${touch.pageY - (size * 0.4) / 2}px`;
+        trail.style.left = `${touch.pageX - (size * 0.4) / 2}px`;
+        trail.style.pointerEvents = "none";
+        document.body.appendChild(trail);
+
+        setTimeout(() => {
+          document.body.removeChild(trail);
+        }, config.trailTime);
+      }
+    }
+  });
+
+  document.addEventListener("touchstart", (e) => {
+    mouseIsDown = true;
+  });
+
+  document.addEventListener("touchend", (e) => {
+    cursor.style.display="none";
+    mouseIsDown = false;
+    
+  });
+
+
+
   if (config.showTrailWhileMouseDown) {
     window.onmousedown = (e) => {
+      cursor.style.display="flex";
       mouseIsDown = true;
     };
 
