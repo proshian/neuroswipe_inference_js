@@ -4,9 +4,8 @@ from flask import Flask, render_template, jsonify, request
 
 from predict import Predictor
 
-predictor = None
 app = Flask(__name__)
-
+app.config['PREDICTOR'] = None
 
 
 @app.route('/')
@@ -15,7 +14,7 @@ def index():
     # First transfomer layer processes forever and never finishes.  This
     # problem happens only when hosted in pythonfromanywhere.com.  Locally
     # we can initialize predictor in the global scope.
-    if predictor is None:
+    if app.config['PREDICTOR'] is None:
         app.config['PREDICTOR'] = Predictor()
     return render_template('index.html')
 
