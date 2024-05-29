@@ -7,22 +7,15 @@ from predict import Predictor
 predictor = None
 app = Flask(__name__)
 
-# Predictor stores 
-# * model with weights
-# * data_preproessing_function
-# * decoding method
 
-# For some reason the first transfomrer layer would never return anything
-# if we initialize predictor here.  Even stranger, this issue happens only
-# on pythonfromanywhere.com. We could initialize predictor here if 
-# we are running the code locally.
-predictor = None
 
 @app.route('/')
 def index():
-    global predictor 
-    predictor = Predictor()
-    
+    # If predictor is initialized outside any functions in the global scope,
+    # First transfomer layer processes forever and never finishes.  This
+    # problem happens only when hosted in pythonfromanywhere.com.  Locally
+    # we can initialize predictor in the global scope.
+    app.config['PREDICTOR'] = Predictor()
     return render_template('index.html')
 
 @app.route('/process_swipe', methods=['POST'])
@@ -36,7 +29,7 @@ def process_swipe():
 
     # Process the data (for now, just return a simple string)
     # predictions = [f"dummy_prediction_{i}" for i in range(4)]
-    predictions = predictor.predict(x,y,t)
+    predictions = app.config['PREDICTOR'].predict(x,y,t)
 
     # Return the result as JSON
     return jsonify(predictions)
