@@ -15,7 +15,8 @@ def index():
     # First transfomer layer processes forever and never finishes.  This
     # problem happens only when hosted in pythonfromanywhere.com.  Locally
     # we can initialize predictor in the global scope.
-    app.config['PREDICTOR'] = Predictor()
+    if predictor is None:
+        app.config['PREDICTOR'] = Predictor()
     return render_template('index.html')
 
 @app.route('/process_swipe', methods=['POST'])
