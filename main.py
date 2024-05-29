@@ -11,10 +11,18 @@ app = Flask(__name__)
 # * model with weights
 # * data_preproessing_function
 # * decoding method
-predictor = Predictor()
+
+# For some reason the first transfomrer layer would never return anything
+# if we initialize predictor here.  Even stranger, this issue happens only
+# on pythonfromanywhere.com. We could initialize predictor here if 
+# we are running the code locally.
+predictor = None
 
 @app.route('/')
 def index():
+    global predictor 
+    predictor = Predictor()
+    
     return render_template('index.html')
 
 @app.route('/process_swipe', methods=['POST'])
