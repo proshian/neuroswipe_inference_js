@@ -15,12 +15,35 @@ function fill_keyboard(keyboardElem, keyboardData) {
         
         const keyElem = document.createElement('div');
         keyElem.classList.add('keyboard-key');
+
+        const keyProperties = {
+            'top': 10 * y_coef + 'px',
+            'left': 6 * x_coef + 'px',
+            'right': 6 * x_coef + 'px',
+            'bottom': 10 * y_coef + 'px',
+            'fontSize': 32 * y_coef + 'px',
+            'borderRadius': 20 * y_coef + 'px',
+            'boxShadow': '0px ' + 4 * y_coef + 'px ' + 4 * y_coef + '#a3a3a3',
+        }
+
+        Object.entries(keyProperties).forEach(([key, value]) => {
+            keyElem.style[key] = value
+        })
+
+
         keyElem.textContent = key.label || key.action;
         keyHitbox.appendChild(keyElem);
 
 
         keyboardElem.appendChild(keyHitbox);
     })
+}
+
+
+function empty_keyboard(keyboardElem) {
+    while (keyboardElem.firstChild) {
+        keyboardElem.removeChild(keyboardElem.firstChild);
+    }
 }
 
 
@@ -164,6 +187,9 @@ function handleSwipe(event) {
 
 
 
+
+
+
 const keyboardEl = document.getElementById('keyboard');
 keyboardEl.style.height = keyboardEl.getBoundingClientRect().width / 2 + 'px'; 
 keyboardEl.addEventListener('touchstart', (ev) => {clearPredictions()})
@@ -175,3 +201,10 @@ fill_keyboard(keyboardEl, gnameToGrid[grid_name])
 const swipeEmiter = new SwipeEmiter(
     keyboardEl, gnameToGrid[grid_name]["width"], gnameToGrid[grid_name]["height"]);
 swipeEmiter.addEventListener('swipe', handleSwipe)
+
+// fill keyboard each time div size changes
+new ResizeObserver(() => {
+    keyboardEl.style.height = keyboardEl.getBoundingClientRect().width / 2 + 'px'; 
+    empty_keyboard(keyboardEl)
+    fill_keyboard(keyboardEl, gnameToGrid[grid_name])
+}).observe(keyboardEl);

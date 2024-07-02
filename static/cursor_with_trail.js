@@ -2,9 +2,9 @@
 
 (function () {
   const defaults = {
-    color: "#fff",
+    color: "#1A73E8",
     size: 20,
-    trailColor: "#fff",
+    trailColor: "#1A73E8",
     trailTime: 300,
     showTrailAlways: false,
     showTrailWhileMouseDown: true,
