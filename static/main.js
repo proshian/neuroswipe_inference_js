@@ -6,14 +6,20 @@ function fill_keyboard(keyboardElem, keyboardData) {
         const x_coef = keyboardElem.getBoundingClientRect().width / keyboardData.width;
         const y_coef = keyboardElem.getBoundingClientRect().height / keyboardData.height;
 
+        const keyHitbox = document.createElement('div');
+        keyHitbox.classList.add('key-hitbox');
+        keyHitbox.style.left = key.hitbox.x * x_coef + 'px';
+        keyHitbox.style.top = key.hitbox.y * y_coef + 'px';
+        keyHitbox.style.width = key.hitbox.w * x_coef + 'px';
+        keyHitbox.style.height = key.hitbox.h * y_coef + 'px';
+        
         const keyElem = document.createElement('div');
-        keyElem.classList.add('key-hitbox');
+        keyElem.classList.add('keyboard-key');
         keyElem.textContent = key.label || key.action;
-        keyElem.style.left = key.hitbox.x * x_coef + 'px';
-        keyElem.style.top = key.hitbox.y * y_coef + 'px';
-        keyElem.style.width = key.hitbox.w * x_coef + 'px';
-        keyElem.style.height = key.hitbox.h * y_coef + 'px';
-        keyboardElem.appendChild(keyElem);
+        keyHitbox.appendChild(keyElem);
+
+
+        keyboardElem.appendChild(keyHitbox);
     })
 }
 
