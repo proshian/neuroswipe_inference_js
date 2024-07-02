@@ -2,19 +2,20 @@ import sys; import os; sys.path.insert(1, os.path.join(os.getcwd(), "yandex-cup-
 
 from flask import Flask, render_template, jsonify, request
 
-from predict import Predictor
+from predict_inference import Predictor
 
-predictor = None
 app = Flask(__name__)
+app.config['PREDICTOR'] = None
 
-# Predictor stores 
-# * model with weights
-# * data_preproessing_function
-# * decoding method
-predictor = Predictor()
 
 @app.route('/')
 def index():
+    # If predictor is initialized outside any functions in the global scope,
+    # First transfomer layer processes forever and never finishes.  This
+    # problem happens only when hosted in pythonfromanywhere.com.  Locally
+    # we can initialize predictor in the global scope.
+    if app.config['PREDICTOR'] is None:
+        app.config['PREDICTOR'] = Predictor()
     return render_template('index.html')
 
 @app.route('/process_swipe', methods=['POST'])
@@ -28,7 +29,7 @@ def process_swipe():
 
     # Process the data (for now, just return a simple string)
     # predictions = [f"dummy_prediction_{i}" for i in range(4)]
-    predictions = predictor.predict(x,y,t)
+    predictions = app.config['PREDICTOR'].predict(x,y,t)
 
     # Return the result as JSON
     return jsonify(predictions)

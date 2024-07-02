@@ -1,3 +1,15 @@
+### Начало костыля для pythonfromanywhere.com
+
+import sys; import os; sys.path.insert(1, os.path.join(os.getcwd(), "yandex-cup-2023-ml-neuroswipe/src"))
+
+PROJECT_DIR_NAME = 'neuroswipe_inference_js'
+
+if PROJECT_DIR_NAME in os.listdir(os.getcwd()):
+    os.chdir(os.path.join(os.getcwd(), PROJECT_DIR_NAME))
+
+### Конец костыля для pythonfromanywhere.com
+
+
 from typing import List
 
 import torch

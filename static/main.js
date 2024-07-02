@@ -2,19 +2,63 @@ import gnameToGrid from './gridname_to_grid.js';
 
 
 function fill_keyboard(keyboardElem, keyboardData) {
+
     keyboardData.keys.forEach(key => {
         const x_coef = keyboardElem.getBoundingClientRect().width / keyboardData.width;
         const y_coef = keyboardElem.getBoundingClientRect().height / keyboardData.height;
 
+        const keyProperties = {
+            'top': 10 * y_coef + 'px',
+            'left': 6 * x_coef + 'px',
+            'right': 6 * x_coef + 'px',
+            'bottom': 10 * y_coef + 'px',
+            'fontSize': 52 * y_coef + 'px',
+            'borderRadius': 20 * y_coef + 'px',
+            'boxShadow': '0px ' + 6 * y_coef + 'px ' + 6 * y_coef + 'px ' + '#a3a3a3',
+        }
+
+        const keyHitbox = document.createElement('div');
+        keyHitbox.classList.add('key-hitbox');
+        keyHitbox.style.left = key.hitbox.x * x_coef + 'px';
+        keyHitbox.style.top = key.hitbox.y * y_coef + 'px';
+        keyHitbox.style.width = key.hitbox.w * x_coef + 'px';
+        keyHitbox.style.height = key.hitbox.h * y_coef + 'px';
+        
         const keyElem = document.createElement('div');
-        keyElem.classList.add('key-hitbox');
-        keyElem.textContent = key.label || key.action;
-        keyElem.style.left = key.hitbox.x * x_coef + 'px';
-        keyElem.style.top = key.hitbox.y * y_coef + 'px';
-        keyElem.style.width = key.hitbox.w * x_coef + 'px';
-        keyElem.style.height = key.hitbox.h * y_coef + 'px';
-        keyboardElem.appendChild(keyElem);
+        keyElem.classList.add('keyboard-key');
+
+        Object.entries(keyProperties).forEach(([key, value]) => {
+            keyElem.style[key] = value
+        })
+
+        // set textContent if key has label property
+        if (key.label) {
+            keyElem.textContent = key.label;
+        }
+
+        // if (key.action) {
+        //     const iconPath = icons[key.action];
+        //     if (iconPath) {
+        //         const icon = document.createElement('img');
+        //         icon.src = iconPath;
+        //         keyElem.appendChild(icon);
+        //     }   
+        // }
+
+
+
+        keyHitbox.appendChild(keyElem);
+
+
+        keyboardElem.appendChild(keyHitbox);
     })
+}
+
+
+function empty_keyboard(keyboardElem) {
+    while (keyboardElem.firstChild) {
+        keyboardElem.removeChild(keyboardElem.firstChild);
+    }
 }
 
 
@@ -42,6 +86,10 @@ class SwipeEmiter extends EventTarget{
         this.touchPositions = { x: [], y: [], t: [] };
         const t = this.t_start = Date.now();
         this.appendTouchPositions(event.touches, t);
+
+        mouseeeConfig = {
+            showTrail: true,
+        };
     }
 
     handleTouchMove(event) {
@@ -57,6 +105,10 @@ class SwipeEmiter extends EventTarget{
 
         const swipeEvent = new CustomEvent('swipe', { detail: this.touchPositions });
         this.dispatchEvent(swipeEvent);
+
+        // mouseeeConfig = {
+        //     showTrail: false,
+        // };
     }
 
     handleMouseDown(event) {
@@ -64,6 +116,10 @@ class SwipeEmiter extends EventTarget{
         this.touchPositions = { x: [], y: [], t: [] };
         const t = this.t_start = Date.now();
         this.appendTouchPositions([{ clientX: event.clientX, clientY: event.clientY }], t);
+
+        mouseeeConfig = {
+            showTrail: true,
+        };
     }
 
     handleMouseMove(event) {
@@ -79,6 +135,10 @@ class SwipeEmiter extends EventTarget{
         
         const swipeEvent = new CustomEvent('swipe', { detail: this.touchPositions });
         this.dispatchEvent(swipeEvent);
+
+        // mouseeeConfig = {
+        //     showTrail: false,
+        // };
     }
 
     appendTouchPositions(touchList, cur_t) {
@@ -142,6 +202,9 @@ function handleSwipe(event) {
 
 
 
+
+
+
 const keyboardEl = document.getElementById('keyboard');
 keyboardEl.style.height = keyboardEl.getBoundingClientRect().width / 2 + 'px'; 
 keyboardEl.addEventListener('touchstart', (ev) => {clearPredictions()})
@@ -153,3 +216,10 @@ fill_keyboard(keyboardEl, gnameToGrid[grid_name])
 const swipeEmiter = new SwipeEmiter(
     keyboardEl, gnameToGrid[grid_name]["width"], gnameToGrid[grid_name]["height"]);
 swipeEmiter.addEventListener('swipe', handleSwipe)
+
+// fill keyboard each time div size changes
+new ResizeObserver(() => {
+    keyboardEl.style.height = keyboardEl.getBoundingClientRect().width / 2 + 'px'; 
+    empty_keyboard(keyboardEl)
+    fill_keyboard(keyboardEl, gnameToGrid[grid_name])
+}).observe(keyboardEl);
