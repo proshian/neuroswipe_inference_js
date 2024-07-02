@@ -1,6 +1,6 @@
 the code is ugly, but it works
 
-![demo](https://github.com/proshian/yandex-cup-2023-ml-neuroswipe/assets/98213116/02a5c230-7eac-486e-b848-911adb1b4c2b)
+![demo](https://github.com/proshian/neuroswipe/assets/98213116/0ccfedf2-5a4e-40b0-98fc-de5f4bcbc1ab)
 
 TODO:
 * Refactor
