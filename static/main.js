@@ -2,9 +2,20 @@ import gnameToGrid from './gridname_to_grid.js';
 
 
 function fill_keyboard(keyboardElem, keyboardData) {
+
     keyboardData.keys.forEach(key => {
         const x_coef = keyboardElem.getBoundingClientRect().width / keyboardData.width;
         const y_coef = keyboardElem.getBoundingClientRect().height / keyboardData.height;
+
+        const keyProperties = {
+            'top': 10 * y_coef + 'px',
+            'left': 6 * x_coef + 'px',
+            'right': 6 * x_coef + 'px',
+            'bottom': 10 * y_coef + 'px',
+            'fontSize': 52 * y_coef + 'px',
+            'borderRadius': 20 * y_coef + 'px',
+            'boxShadow': '0px ' + 6 * y_coef + 'px ' + 6 * y_coef + 'px ' + '#a3a3a3',
+        }
 
         const keyHitbox = document.createElement('div');
         keyHitbox.classList.add('key-hitbox');
@@ -16,22 +27,26 @@ function fill_keyboard(keyboardElem, keyboardData) {
         const keyElem = document.createElement('div');
         keyElem.classList.add('keyboard-key');
 
-        const keyProperties = {
-            'top': 10 * y_coef + 'px',
-            'left': 6 * x_coef + 'px',
-            'right': 6 * x_coef + 'px',
-            'bottom': 10 * y_coef + 'px',
-            'fontSize': 32 * y_coef + 'px',
-            'borderRadius': 20 * y_coef + 'px',
-            'boxShadow': '0px ' + 4 * y_coef + 'px ' + 4 * y_coef + '#a3a3a3',
-        }
-
         Object.entries(keyProperties).forEach(([key, value]) => {
             keyElem.style[key] = value
         })
 
+        // set textContent if key has label property
+        if (key.label) {
+            keyElem.textContent = key.label;
+        }
 
-        keyElem.textContent = key.label || key.action;
+        // if (key.action) {
+        //     const iconPath = icons[key.action];
+        //     if (iconPath) {
+        //         const icon = document.createElement('img');
+        //         icon.src = iconPath;
+        //         keyElem.appendChild(icon);
+        //     }   
+        // }
+
+
+
         keyHitbox.appendChild(keyElem);
 
 

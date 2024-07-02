@@ -11,9 +11,9 @@ TODO:
             * график обучения с точкой на графике, соответствующей эпохе
             * значениия метрик на валидации
     * Выбрать метод декодирования (bs with voc, bs no voc, greedy voc, greedy no voc)
-* Add a mouse / finger trail (like blue trail in gboard)
 * Leave swipepoints connected with lines on screen until new  mousedown or touchstart event happens
-* Resize keyboard when page is resized
+* Add icons
+
 
 Prepare:
 ``` sh
@@ -22,7 +22,7 @@ cd yandex-cup-2023-ml-neuroswipe
 git checkout embeding_experiments
 cd ..
 ```
-щ
+
 If doesn't work try:
 ``` sh
 cd yandex-cup-2023-ml-neuroswipe
@@ -30,11 +30,65 @@ git checkout c5e0a83eb962a68d6be1a6959b5e94ba178205b2
 cd ..
 ```
 
-Run: 
+Run locally: 
 
 ``` sh
 python main.py
 ```
+
+
+If you are trying to run this on pythonanywhere:
+
+1. Your /var/www/{USERNAME}_pythonanywhere_com_wsgi.py file should look like this
+``` python
+# This file contains the WSGI configuration required to serve up your
+# web application at http://<your-username>.pythonanywhere.com/
+# It works by setting the variable 'application' to a WSGI handler of some
+# description.
+#
+# The below has been auto-generated for your Flask project
+
+import sys
+
+# # add your project directory to the sys.path
+PROJECT_HOME = '/home/USERNAME/neuroswipe_inference_js'
+if PROJECT_HOME not in sys.path:
+    sys.path = [PROJECT_HOME] + sys.path
+
+neuroswipe_dir_src = PROJECT_HOME + 'yandex-cup-2023-ml-neuroswipe/src'
+if neuroswipe_dir_src not in sys.path:
+    sys.path = [neuroswipe_dir_src] + sys.path
+
+
+# import flask app but need to call it "application" for WSGI to work
+from main import app as application  # noqa
+```
+Don't forget to chenge PROJECT_HOME and USERNAME and maybe neuroswipe_dir_src if the name of that repo changed
+
+2. You have to change a block of code in ./yandex-cup-2023-ml-neuroswipe/src/word_generators.py:
+
+Before:
+``` python
+    def _mask_out_unallowed_ids(self, prefix_ids: List[int], logits: Tensor
+                                ) -> Tensor:
+        if self.prefix_to_allowed_ids is None:
+            return logits
+        unallowed_ids = self._get_unallowed_token_ids(prefix_ids)
+        logits[torch.tensor(list(unallowed_ids), dtype = torch.int)] = float('-inf')
+        return logits
+```
+
+After:
+``` python
+    def _mask_out_unallowed_ids(self, prefix_ids: List[int], logits: Tensor
+                                ) -> Tensor:
+        if self.prefix_to_allowed_ids is None:
+            return logits
+        unallowed_ids = self._get_unallowed_token_ids(prefix_ids)
+        logits[torch.tensor(list(unallowed_ids), dtype = torch.long)] = float('-inf')
+        return logits
+```
+
 
 **В python from anywhere работает только странным костылем: в Predictor необходимо вынести все содержимое `__init__` в predict. Это можно сделать так:**
 ``` python
@@ -102,4 +156,5 @@ def index():
 ```
 
 с точки зрения дизайна приложене может выглядеть так:
+
 ![design](design_idea.svg)

@@ -5,10 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Keyboard Swipe Logger</title>
 <style>
+    #keyboard-and-predictions {
+        border: 1px solid black;
+        width: 100%;
+        max-width: 700px;
+        margin: auto;
+    }
     #predictions {
         width: 100%;
         max-width: 700px;
-        border: 1px solid black;
+        /* border: 1px solid black; */
         margin: auto;
         box-sizing: border-box;
     }
@@ -48,6 +54,7 @@
         color: black;
         border-radius: 10px;
         box-shadow: 0px 2px 2px #a3a3a3;
+        overflow: hidden;
     }
 
  
@@ -55,16 +62,18 @@
 </head>
 <body>
 
-<div id = "predictions">
-<ol id = "predictions-list">
-    <li id = "pred-0"></li>
-    <li id = "pred-1"></li>
-    <li id = "pred-2"></li>
-    <li id = "pred-3"></li>
-</ol>
-</div>
+<div id="keyboard-and-predictions">
+    <div id="predictions">
+        <ol id = "predictions-list">
+            <li id = "pred-0"></li>
+            <li id = "pred-1"></li>
+            <li id = "pred-2"></li>
+            <li id = "pred-3"></li>
+        </ol>
+    </div>
 
-<div id="keyboard"></div>
+    <div id="keyboard"></div>
+</div>
 
 <script>
     let mouseeeConfig = {
