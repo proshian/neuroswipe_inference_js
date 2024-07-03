@@ -4,18 +4,21 @@ the code is ugly, but it works
 
 TODO:
 * Refactor
-* Add radiobuttons to choose model and decoding algorythm; add grid choice
+* Add radiobuttons to choose model and decoding algorithm; add grid choice
     * Выбрать раскладку
     * Выбрать модель (модель = архитектура + метод предобработки данных + веса)
         * У модели можно вывести
             * график обучения с точкой на графике, соответствующей эпохе
             * значениия метрик на валидации
     * Выбрать метод декодирования (bs with voc, bs no voc, greedy voc, greedy no voc)
-* Leave swipepoints connected with lines on screen until new  mousedown or touchstart event happens
-* Add icons
+* Set an option to leave numbered swipepoints connected with lines on screen until new  mousedown or touchstart event happens
+* Maybe make curor trace points size depended on the `keyboard` div size 
 
+# Launching
 
-Prepare:
+## Locally
+
+Prepare
 ``` sh
 git clone https://github.com/proshian/yandex-cup-2023-ml-neuroswipe.git
 cd yandex-cup-2023-ml-neuroswipe
@@ -24,14 +27,23 @@ git checkout c5e0a83eb962a68d6be1a6959b5e94ba178205b2
 cd ..
 ```
 
+Install requirements for neuroswipe project
+``` sh 
+pip install -r yandex-cup-2023-ml-neuroswipe/requirements.txt
+```
+
+
 Run locally: 
 
 ``` sh
 python main.py
 ```
 
+## Setting up a server on pythonanywhere.com
 
-If you are trying to run this on pythonanywhere:
+If you are trying to run this on pythonanywhere you won't be able to install requirements but the project works with library versions that already present there are
+
+There are two extra steps that you need to do when launching in pythonanywhere: 
 
 1. Your /var/www/{USERNAME}_pythonanywhere_com_wsgi.py file should look like this
 ``` python
