@@ -1,6 +1,6 @@
 the code is ugly, but it works
 
-![demo](https://github.com/proshian/neuroswipe/assets/98213116/0ccfedf2-5a4e-40b0-98fc-de5f4bcbc1ab)
+![demo](https://github.com/proshian/neuroswipe/assets/98213116/0af050e7-2e2c-4502-a498-376bd4eb3f0e)
 
 TODO:
 * Refactor
