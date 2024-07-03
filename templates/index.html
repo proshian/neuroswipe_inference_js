@@ -7,7 +7,7 @@
 <style>
 
     @font-face {
-    font-family: roboto;
+    font-family: "Roboto";
     src: url("{{ url_for('static', filename='Roboto/Roboto-Regular.ttf') }}");
     }
 
@@ -23,7 +23,7 @@
         /* border: 1px solid black; */
         margin: auto;
         box-sizing: border-box;
-        font-family: roboto, sans-serif;
+        font-family: "Roboto", sans-serif;
     }
     #keyboard {
         position: relative;
@@ -62,7 +62,12 @@
         border-radius: 10px;
         box-shadow: 0px 2px 2px #a3a3a3;
         overflow: hidden;
-        font-family: roboto, sans-serif;
+        font-family: "Roboto", sans-serif;
+    }
+
+    .secondary-pred {
+        /* color: #a3a3a3; */
+        opacity: 50%;
     }
 
  
@@ -74,9 +79,9 @@
     <div id="predictions">
         <ol id = "predictions-list">
             <li id = "pred-0"></li>
-            <li id = "pred-1"></li>
-            <li id = "pred-2"></li>
-            <li id = "pred-3"></li>
+            <li id = "pred-1" class = "secondary-pred"></li>
+            <li id = "pred-2" class = "secondary-pred"></li>
+            <li id = "pred-3" class = "secondary-pred"></li>
         </ol>
     </div>
 

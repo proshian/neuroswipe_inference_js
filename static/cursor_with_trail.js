@@ -39,6 +39,7 @@
   cursor.style.justifyContent = "center";
   cursor.style.alignItems = "center";
   cursor.style.pointerEvents = "none";
+  cursor.style.top = "-100px";  // To hide cursor before first mouse move
 
   // === POINTER STYLE ===
   pointer.style.position = "absolute";

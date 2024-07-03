@@ -22,9 +22,9 @@ export class SwipeEmitter extends EventTarget{
         const t = this.t_start = Date.now();
         this.appendTouchPositions(event.touches, t);
 
-        mouseeeConfig = {
-            showTrail: true,
-        };
+        // mouseeeConfig = {
+        //     showTrail: true,
+        // };
     }
 
     handleTouchMove(event) {
@@ -52,9 +52,9 @@ export class SwipeEmitter extends EventTarget{
         const t = this.t_start = Date.now();
         this.appendTouchPositions([{ clientX: event.clientX, clientY: event.clientY }], t);
 
-        mouseeeConfig = {
-            showTrail: true,
-        };
+        // mouseeeConfig = {
+        //     showTrail: true,
+        // };
     }
 
     handleMouseMove(event) {

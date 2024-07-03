@@ -109,7 +109,7 @@ const swipeEmitter = new SwipeEmitter(
 );
 swipeEmitter.addEventListener('swipe', handleSwipe);
 
-// fill keyboard each time div size changes
+// Refill keyboard each time div size changes
 new ResizeObserver(() => {
     keyboardEl.style.height = `${keyboardEl.getBoundingClientRect().width / 2}px`;
     empty_keyboard(keyboardEl)

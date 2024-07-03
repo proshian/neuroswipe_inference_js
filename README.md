@@ -13,6 +13,8 @@ TODO:
     * Выбрать метод декодирования (bs with voc, bs no voc, greedy voc, greedy no voc)
 * Set an option to leave numbered swipepoints connected with lines on screen until new  mousedown or touchstart event happens
 * Maybe make curor trace points size depended on the `keyboard` div size 
+* Maybe make cursor trace visible only when a swipe was started on keyboard element
+* Maybe make word_candidates opacity dependant on the word probability
 
 # Launching
 
