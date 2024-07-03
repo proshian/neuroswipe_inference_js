@@ -12,7 +12,7 @@ function fill_keyboard(keyboardElem, keyboardData) {
             'left': 6 * x_coef + 'px',
             'right': 6 * x_coef + 'px',
             'bottom': 10 * y_coef + 'px',
-            'fontSize': 52 * y_coef + 'px',
+            'fontSize': 72 * y_coef + 'px',
             'borderRadius': 20 * y_coef + 'px',
             'boxShadow': '0px ' + 6 * y_coef + 'px ' + 6 * y_coef + 'px ' + '#a3a3a3',
         }
