@@ -1,12 +1,12 @@
 # Neuroswipe web
 
 
-Keyboard demonstration that uses a neural network from [neuroswipe project](https://github.com/proshian/neuroswipe) to decode swipes into words
+A keyboard demonstration that uses a neural network from [neuroswipe project](https://github.com/proshian/neuroswipe) to decode swipes into words
 
 
 ![demo](https://github.com/proshian/neuroswipe/assets/98213116/4f3f5d7d-833b-41ae-8c67-288bfd1f5b54)
 
-The demostrtion is running on [https://proshian.pythonanywhere.com/](https://proshian.pythonanywhere.com/)
+The demostration is running on [https://proshian.pythonanywhere.com/](https://proshian.pythonanywhere.com/)
 
 # Launching
 
@@ -97,7 +97,7 @@ After:
 
 с точки зрения дизайна приложене планируется таким:
 
-![design](design_idea.svg)
+![design](./readme_assets/design_idea.svg)
 
 # TODO:
 * Refactor

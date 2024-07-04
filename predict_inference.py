@@ -30,7 +30,7 @@ from transforms import EncoderFeaturesGetter
 # }
 
 GRID_NAME_TOK_NKL_STATE = {
-    'extra': 'nearest_key_lookup_state.pkl'
+    'extra': './static/nearest_key_lookup_state.pkl'
 }
 
 
@@ -42,7 +42,7 @@ class Predictor:
 
     def __init__(self) -> None:
         self.set_feats_extractor("traj_and_nearest")
-        self.model = get_m1_bigger_model('cpu','./static/m1_bigger_v2__2023_11_12__20_38_47__0.13129__greed_acc_0.86130__extra_l2_0_ls0_switch_2.pt')
+        self.model = get_m1_bigger_model('cpu','./static/model_weights/m1_bigger_v2__2023_11_12__20_38_47__0.13129__greed_acc_0.86130__extra_l2_0_ls0_switch_2.pt')
         char_tokenizer = CharLevelTokenizerv2('./static/voc.txt')
 
         with open('./static/voc.txt', 'r', encoding='utf-8') as f:
