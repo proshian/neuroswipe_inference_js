@@ -3,6 +3,7 @@ import sys; import os; sys.path.insert(1, os.path.join(os.getcwd(), "yandex-cup-
 from flask import Flask, render_template, jsonify, request
 
 from predict_inference import Predictor
+from input_validatoin import is_input_valid
 
 app = Flask(__name__)
 app.config['PREDICTOR'] = None
@@ -21,6 +22,12 @@ def index():
 @app.route('/process_swipe', methods=['POST'])
 def process_swipe():
     data = request.get_json()
+
+    is_input_ok, inpt_valid_msg = is_input_valid(data)
+    if not is_input_ok:
+        # Temporarily send the error in the sme format as correct data;
+        # THe error will be shown in the predictions field
+        return jsonify([inpt_valid_msg] + ['']*3), 400
 
     # Extract x, y, t from the JSON request
     x = data.get('x')
