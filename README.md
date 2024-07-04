@@ -1,26 +1,21 @@
-the code is ugly, but it works
+# Neuroswipe web
 
-![demo](https://github.com/proshian/neuroswipe/assets/98213116/0af050e7-2e2c-4502-a498-376bd4eb3f0e)
 
-TODO:
-* Refactor
-* Add radiobuttons to choose model and decoding algorithm; add grid choice
-    * Выбрать раскладку
-    * Выбрать модель (модель = архитектура + метод предобработки данных + веса)
-        * У модели можно вывести
-            * график обучения с точкой на графике, соответствующей эпохе
-            * значениия метрик на валидации
-    * Выбрать метод декодирования (bs with voc, bs no voc, greedy voc, greedy no voc)
-* Set an option to leave numbered swipepoints connected with lines on screen until new  mousedown or touchstart event happens
-* Maybe make curor trace points size depended on the `keyboard` div size 
-* Maybe make cursor trace visible only when a swipe was started on keyboard element
-* Maybe make word_candidates opacity dependant on the word probability
+A keyboard demonstration that uses a neural network from [neuroswipe project](https://github.com/proshian/neuroswipe) to decode swipes into words
+
+
+![demo](https://github.com/proshian/neuroswipe/assets/98213116/4f3f5d7d-833b-41ae-8c67-288bfd1f5b54)
+
+The demostration is running on [https://proshian.pythonanywhere.com/](https://proshian.pythonanywhere.com/)
 
 # Launching
 
 ## Locally
 
-Prepare
+Prepare the repository:
+
+Clone neuroswipe project to the root of this demonstration project 
+
 ``` sh
 git clone https://github.com/proshian/yandex-cup-2023-ml-neuroswipe.git
 cd yandex-cup-2023-ml-neuroswipe
@@ -29,7 +24,7 @@ git checkout c5e0a83eb962a68d6be1a6959b5e94ba178205b2
 cd ..
 ```
 
-Install requirements for neuroswipe project
+Install requirements for neuroswipe project:
 ``` sh 
 pip install -r yandex-cup-2023-ml-neuroswipe/requirements.txt
 ```
@@ -102,4 +97,23 @@ After:
 
 с точки зрения дизайна приложене планируется таким:
 
-![design](design_idea.svg)
+![design](./readme_assets/design_idea.svg)
+
+# TODO:
+* Refactor
+* Add radiobuttons to choose model and decoding algorithm; add grid choice
+    * Выбрать раскладку
+    * Выбрать модель (модель = архитектура + метод предобработки данных + веса)
+        * У модели можно вывести
+            * график обучения с точкой на графике, соответствующей эпохе
+            * значениия метрик на валидации
+    * Выбрать метод декодирования (bs with voc, bs no voc, greedy voc, greedy no voc)
+* Set an option to leave numbered swipepoints connected with lines on screen until new  mousedown or touchstart event happens
+* Maybe make curor trace points size depended on the `keyboard` div size 
+* Maybe make cursor trace visible only when a swipe was started on keyboard element
+* Maybe make word_candidates opacity dependant on the word probability
+
+# Any comments / adice on enhancements are very welcome in github issues :)
+
+If you've got an idea on how to enhance this demonstration in any way; if you've found flaws in the code please let me know, I would be very greatful :)
+
