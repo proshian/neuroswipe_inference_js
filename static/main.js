@@ -94,17 +94,13 @@ async function handleSwipe(event) {
             body: JSON.stringify(event.detail),
         });
 
-        console.log("Response:")
-        console.log(response);
-
         if (!response.ok) {
-            console.log("Response not ok")
             const errorData = await response.json();
-            console.log(errorData)
+            // console.log("Error:")
+            // console.log(errorData)
             showError(errorData.error);
         } 
         else {
-            console.log("Response ok")
             const predictions = await response.json();
             console.log('Predictions:', predictions);
             updatePredictions(predictions);
@@ -112,7 +108,7 @@ async function handleSwipe(event) {
     }
     
     catch (error) {
-        console.log('An unexpected error occured.');
+        // console.log('An unexpected error occured.');
         showError('An unexpected error occurred.');
     }
 }
