@@ -69,15 +69,29 @@ function clearPredictions() {
 }
 
 function showError(message) {
+    switchResultsDivToErrorMode();
     const errorMessageDiv = document.getElementById('error-message');
     errorMessageDiv.textContent = message;
+}
+
+function switchResultsDivToErrorMode() {
+    const errorMessageDiv = document.getElementById('error-message');
     errorMessageDiv.style.display = 'block';
+    const predictionsDiv = document.getElementById('predictions');
+    predictionsDiv.style.display = 'none';
+}
+
+function switchResultsDivToPredsMode() {
+    const errorMessageDiv = document.getElementById('error-message');
+    errorMessageDiv.style.display = 'none';
+    const predictionsDiv = document.getElementById('predictions');
+    predictionsDiv.style.display = 'block';
 }
 
 function removeError() {
+    switchResultsDivToPredsMode();
     const errorMessageDiv = document.getElementById('error-message');
     errorMessageDiv.textContent = '';
-    errorMessageDiv.style.display = 'none';
 }
 
 

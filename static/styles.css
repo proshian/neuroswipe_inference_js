@@ -6,46 +6,42 @@ src: url("Roboto/Roboto-Regular.ttf");
 #error-message {
     color: red;
     display: none;
-    margin: 10px 0;
     padding: 10px;
     border: 1px solid red;
     background-color: #ffe6e6;
+    height: 100%;
 }
 
-#keyboard-and-predictions {
+#predictions {
+    width: 100%;
+    height: 100%; 
+}
+
+#keyboard-and-result {
     border: 1px solid black;
     width: 100%;
     max-width: 700px;
     margin: auto;
 }
 
-#predictions {
-    width: 100%;
-    max-width: 700px;
-    /* border: 1px solid black; */
+#result {
+    height: 108px;
     margin: auto;
     box-sizing: border-box;
     font-family: "Roboto", sans-serif;
+    overflow: hidden; 
 }
+
 
 #keyboard {
     position: relative;
-    height: 16px;
-    width: 100%;
-    max-width: 700px;
-    /* border: 1px solid black; */
-    margin: auto;
     background-color: #E8EAED;
 }
 
 .key-hitbox {
     position: absolute;
-    /* border: 1px solid black;
-    background-color: lightgray;
-    text-align: center; */
     cursor: pointer;
     box-sizing: border-box;
-    /* padding: 5px; */
 }
 
 /*keyboard-key is positioned on top of key-hitbox and takes all space inside of it (except for margin)*/
@@ -55,13 +51,11 @@ src: url("Roboto/Roboto-Regular.ttf");
     left: 3px;
     right: 3px;
     bottom: 6px;
-    /* margin: 5% 5%; */
     background-color: white;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 16px;
-    /* font-weight: bold; */
     color: black;
     border-radius: 10px;
     box-shadow: 0px 2px 2px #a3a3a3;
@@ -70,6 +64,5 @@ src: url("Roboto/Roboto-Regular.ttf");
 }
 
 .secondary-pred {
-    /* color: #a3a3a3; */
     opacity: 50%;
 }
