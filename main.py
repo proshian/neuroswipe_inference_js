@@ -25,9 +25,7 @@ def process_swipe():
 
     is_input_ok, inpt_valid_msg = is_input_valid(data)
     if not is_input_ok:
-        # Temporarily send the error in the sme format as correct data;
-        # THe error will be shown in the predictions field
-        return jsonify([inpt_valid_msg] + ['']*3), 400
+        return jsonify({'error': inpt_valid_msg}), 400
 
     # Extract x, y, t from the JSON request
     x = data.get('x')

@@ -68,29 +68,54 @@ function clearPredictions() {
     }
 }
 
-
-function handleSwipe(event) {
-    console.log(event.detail)
-
-    // Send data to the server
-    fetch('/process_swipe', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(event.detail),
-    })
-    .then(response => response.json())
-    .then(result => {
-        // Handle the result from the server
-        console.log(result);
-        updatePredictions(result);
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
+function showError(message) {
+    const errorMessageDiv = document.getElementById('error-message');
+    errorMessageDiv.textContent = message;
+    errorMessageDiv.style.display = 'block';
 }
 
+function removeError() {
+    const errorMessageDiv = document.getElementById('error-message');
+    errorMessageDiv.textContent = '';
+    errorMessageDiv.style.display = 'none';
+}
+
+
+async function handleSwipe(event) {
+    console.log(event.detail)
+
+    try {
+        // Send data to the server
+        const response = await fetch('/process_swipe', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(event.detail),
+        });
+
+        console.log("Response:")
+        console.log(response);
+
+        if (!response.ok) {
+            console.log("Response not ok")
+            const errorData = await response.json();
+            console.log(errorData)
+            showError(errorData.error);
+        } 
+        else {
+            console.log("Response ok")
+            const predictions = await response.json();
+            console.log('Predictions:', predictions);
+            updatePredictions(predictions);
+        } 
+    }
+    
+    catch (error) {
+        console.log('An unexpected error occured.');
+        showError('An unexpected error occurred.');
+    }
+}
 
 
 
@@ -98,8 +123,8 @@ function handleSwipe(event) {
 
 const keyboardEl = document.getElementById('keyboard');
 keyboardEl.style.height = `${keyboardEl.getBoundingClientRect().width / 2}px`;
-keyboardEl.addEventListener('touchstart', clearPredictions);
-keyboardEl.addEventListener('mousedown', clearPredictions);
+keyboardEl.addEventListener('touchstart', () => {clearPredictions(); removeError();});
+keyboardEl.addEventListener('mousedown', () => {clearPredictions(); removeError();});
 
 const grid_name = "extra";
 

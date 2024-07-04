@@ -11,6 +11,15 @@
     src: url("{{ url_for('static', filename='Roboto/Roboto-Regular.ttf') }}");
     }
 
+    #error-message {
+        color: red;
+        display: none;
+        margin: 10px 0;
+        padding: 10px;
+        border: 1px solid red;
+        background-color: #ffe6e6;
+    }
+
     #keyboard-and-predictions {
         border: 1px solid black;
         width: 100%;
@@ -74,6 +83,7 @@
 </style>
 </head>
 <body>
+    <div id="error-message"></div>
 
 <div id="keyboard-and-predictions">
     <div id="predictions">
@@ -101,8 +111,6 @@
   src="{{ url_for('static', filename='cursor_with_trail.js') }}"
   type="module"
 ></script>
-
-
 
 <script src="{{ url_for('static', filename='main.js') }}" type="module"> </script>
 <!-- <script type = "module", src="main.js"></script> -->
