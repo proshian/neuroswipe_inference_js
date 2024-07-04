@@ -100,7 +100,6 @@ After:
 ![design](./readme_assets/design_idea.svg)
 
 # TODO:
-* Refactor
 * Add radiobuttons to choose model and decoding algorithm; add grid choice
     * Выбрать раскладку
     * Выбрать модель (модель = архитектура + метод предобработки данных + веса)
@@ -112,6 +111,8 @@ After:
 * Maybe make curor trace points size depended on the `keyboard` div size 
 * Maybe make cursor trace visible only when a swipe was started on keyboard element
 * Maybe make word_candidates opacity dependant on the word probability
+* Replace `predictions` div with `results` div. The div will contain either `predictions` div or `error` div depending on server response   
+* Make sure everything is in right folders (all elements of static and templates are where they belong) 
 
 # Any comments / adice on enhancements are very welcome in github issues :)
 
