@@ -4,7 +4,7 @@
 Keyboard demonstration that uses a neural network from [neuroswipe project](https://github.com/proshian/neuroswipe) to decode swipes into words
 
 
-![demo](https://github.com/proshian/neuroswipe/assets/98213116/0af050e7-2e2c-4502-a498-376bd4eb3f0e)
+![demo](https://github.com/proshian/neuroswipe/assets/98213116/4f3f5d7d-833b-41ae-8c67-288bfd1f5b54)
 
 The demostrtion is running on [https://proshian.pythonanywhere.com/](https://proshian.pythonanywhere.com/)
 
