@@ -10,26 +10,28 @@ src: url("Roboto/Roboto-Regular.ttf");
     border: 1px solid red;
     background-color: #ffe6e6;
     height: 100%;
+    box-sizing: border-box;
 }
 
 #predictions {
-    width: 100%;
-    height: 100%; 
+    height: 100%;
+    box-sizing: border-box;
 }
 
 #keyboard-and-result {
-    border: 1px solid black;
+    border: 6px solid #E8EAED;
     width: 100%;
     max-width: 700px;
     margin: auto;
 }
 
 #result {
-    height: 108px;
+    border: 4px solid #E8EAED;
+    height: 118px;
     margin: auto;
     box-sizing: border-box;
     font-family: "Roboto", sans-serif;
-    overflow: hidden; 
+    overflow: hidden;
 }
 
 
