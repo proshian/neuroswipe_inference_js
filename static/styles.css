@@ -3,19 +3,31 @@ font-family: "Roboto";
 src: url("Roboto/Roboto-Regular.ttf");
 }
 
+body {
+    margin: 0px;
+}
+
+.result {
+    padding: 10px;
+    box-sizing: border-box;
+    height: 100%;
+    border-radius: 6px;
+}
+
 #error-message {
     color: red;
     display: none;
-    padding: 10px;
     border: 1px solid red;
     background-color: #ffe6e6;
-    height: 100%;
-    box-sizing: border-box;
 }
 
 #predictions {
-    height: 100%;
-    box-sizing: border-box;
+    background-color: white;
+}
+
+#predictions-list {
+    margin: 0px;
+    padding-inline-start: 30px;  /* default is 40px */
 }
 
 #keyboard-and-result {
@@ -23,10 +35,13 @@ src: url("Roboto/Roboto-Regular.ttf");
     width: 100%;
     max-width: 700px;
     margin: auto;
+    box-sizing: border-box;
+    border-radius: 6px;
 }
 
-#result {
-    border: 4px solid #E8EAED;
+#result-container {
+    background-color: #E8EAED;
+    padding: 4px;
     height: 118px;
     margin: auto;
     box-sizing: border-box;
